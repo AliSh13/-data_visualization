@@ -1,6 +1,7 @@
 import csv
 import pygal.maps.world
 from pygal.maps.world import COUNTRIES
+from pygal.style import RotateStyle
 
 file =  'Population/data_csv.csv'
 
@@ -37,13 +38,16 @@ with open(file)  as f:
         else:
             cc_pops_4[cc] = pop
 
+    #number of countries
+    num_counr_1, num_counr_2, num_counr_3, num_counr_4 = str(len(cc_pops_1)), str(len(cc_pops_2)), str(len(cc_pops_3)), str(len(cc_pops_4))
 
-worldmap = pygal.maps.world.World()
+wm_style = RotateStyle('#336699')
+worldmap = pygal.maps.world.World(style=wm_style)
 worldmap.title = 'World population in 2010'
 
-worldmap.add('0-10m', cc_pops_1 )
-worldmap.add('10-100m', cc_pops_2 )
-worldmap.add('100-1bn', cc_pops_3 )
-worldmap.add('>1bn', cc_pops_4 )
+worldmap.add('0-10m ' + num_counr_1 , cc_pops_1 )
+worldmap.add('10-100m ' + num_counr_2, cc_pops_2 )
+worldmap.add('100-1bn ' + num_counr_3, cc_pops_3 )
+worldmap.add('>1bn ' + num_counr_4, cc_pops_4 )
 
 worldmap.render_to_file('Population/world_population.svg')
